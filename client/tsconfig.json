@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/lib/api/auth/[…nextauth].js", "src/lib/api/auth/[…nextauth].js", "src/components/auth/refreshTokenHandler.js", "src/lib/common/auth-verify.js", "src/lib/common/auth-verify.js", "src/lib/common/with-router.js", "src/lib/common/with-router.js"],
   "exclude": ["node_modules"]
 }
