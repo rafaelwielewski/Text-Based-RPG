@@ -1,13 +1,11 @@
-import http from "@/services/http";
-import axios from "axios";
-
-const API_URL = "http://localhost:8080/api/auth/";
+import http from "@/lib/services/http";
 
 class AuthService {
 
+  login = async (username, password) => {
     
-  async login(username, password) {
-    return http.post("auth/signin", {
+    try {
+      http.post("auth/signin", {
         username,
         password
       })
@@ -15,10 +13,14 @@ class AuthService {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
-        console.log(JSON.parse(localStorage.getItem('user')))
         return response.data;
       });
-  }
+
+    } catch (e) {
+      console.log(e);
+    }
+
+  };
 
   async logout() {
     localStorage.removeItem("user");
@@ -32,8 +34,17 @@ class AuthService {
     });
   }
 
+  async decodeJwt(token) {
+    var base64Payload = token.split(".")[1];
+    var payloadBuffer = Buffer.from(base64Payload, "base64");
+    return JSON.parse(payloadBuffer.toString());
+
+  }
+
   async getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const decodedJwt = this.decodeJwt(user.accessToken);
+    return decodedJwt
   }
 }
 

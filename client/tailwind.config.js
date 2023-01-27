@@ -64,6 +64,12 @@ module.exports = {
         '192': '48rem',
         '200': '50rem',
       },
+      height: {
+        '128': '32rem',
+        '156': '39rem',
+        '192': '48rem',
+        '200': '50rem',
+      },
       screens: {
         'auth': '100px',
       },

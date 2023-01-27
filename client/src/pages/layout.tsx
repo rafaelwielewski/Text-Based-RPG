@@ -3,7 +3,7 @@ export default function RootLayout({ children }: {
   }) {
     return (
       <html lang="en">
-        <body className="bg-danger">{children}</body>
+        <body className="">{children}</body>
       </html>
     );
   }

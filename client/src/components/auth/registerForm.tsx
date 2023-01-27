@@ -1,8 +1,8 @@
 import { useState } from "react";
-import http from "@/services/http";
+import http from "@/lib/services/http";
 import { signIn, signOut } from 'next-auth/react';
 import Email from "next-auth/providers/email";
-import authService from "@/services/auth.service";
+import authService from "@/lib/services/auth/auth.service";
 import { useRouter } from "next/router";
 
 export default function RegisterForm() {

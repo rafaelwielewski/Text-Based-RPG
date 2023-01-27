@@ -1,4 +1,4 @@
-import authService from "@/services/auth.service";
+import authService from "@/lib/services/auth/auth.service";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -23,8 +23,9 @@ export default function LoginForm() {
   
       const username = event.target.username.value;
       const password = event.target.password.value;
-  
+
       authService.login(username, password);
+      console.log(localStorage.getItem('user'))
       router.push("/");
         
   

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import authService from "@/services/auth.service";
+import authService from "@/lib/services/auth/auth.service";
 
 export default function authVerify() {
   
