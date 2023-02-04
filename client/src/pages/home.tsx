@@ -16,7 +16,6 @@ export default function Home() {
     iat: '',
     exp: '',
   });
-  const [playerIsCreated, setPlayerIsCreated] = useState(false);
   const [gameLog, setGameLog] = useState<GameLog[]>([]);
   const [gameLogKey, setGameLogKey] = useState(0);
   const [player, setPlayer] = useState({
@@ -31,8 +30,10 @@ export default function Home() {
     weapon: '',
     armour: '',
   });
-  
+  const [location, setLocation] = useState({})  
   const actions = {
+    login: "Login",
+    playernotfound: `Player not found, please write "create", to create your player.`,
     create: "Create",
     attack: "Attack",
     run: "Run",
@@ -48,62 +49,109 @@ export default function Home() {
   }
 
   const stats = 
+    "Your Stats: " +
     "HitPoints: "+player.hitpoints+
-    ", Attack: "+player.attack+
-    ", Strenght: "+player.strenght+
-    ", Defense: "+player.defense+"."
+    "; Attack: "+player.attack+
+    "; Strenght: "+player.strenght+
+    "; Defense: "+player.defense+"."
+
+  const xp = 
+    "Your Experiences: " +
+    "HitPoints: "+player.hitpointsxp+
+    "; Attack: "+player.attackxp+
+    "; Strenght: "+player.strenghtxp+
+    "; Defense: "+player.defensexp+"."
+
+    const equipments = 
+    "Your Equipments: " +
+    "Weapon: "+player.weapon+
+    "; Armour: "+player.armour+"."
+
+  const history = {
+
+    playerIsCreated: "Cannot create player, already created.",
+    playerCreated: "Player created."
+  }
 
   const messages = {
 
-    playerIsCreated: "Cannot create player, already created",
-    playerCreated: "Player created"
+    welcome: "Welcome to Written Kingdom.",
+    welcome2: `Write "login" to start or "create" if you don't have a player.`,
+    login: "Welcome " + user.username + ".",
+    playerIsCreated: "Cannot create player, already created.",
+    playerCreated: "Player created.",
+    playernotfound: `Player not found, write "create" to create your player.`,
+    playerIsLogged: "Player already logged in."
   }
 
   useEffect(() => {
 
 
     const authUser = localStorage.getItem('user');
+    console.log(authUser)
     if (!authUser) {
       router.push("/auth/login");
+      
+    } else {
+
+      authService.getCurrentUser().then(result => setUser(result))
+      authService.getCurrentUser().then(result => getPlayerData(result))
+      welcome();
+
     }
-    authService.getCurrentUser().then(result => setUser(result))
-    authService.getCurrentUser().then(result => getPlayerData(result))
-    //getPlayerData()
+
 
   }, []);
 
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  const welcome = async () => {
+
+    let key = gameLogKey;
+    let log = gameLog;
+
+    log = [ ...log, { text: messages.welcome, key: key++ }];
+    log = [ ...log, { text: messages.welcome2, key: key++ }];
+
+    setGameLog(log);
+    setGameLogKey(key)
+
+  }
+
   const getPlayerData = async (result) => {
     
+    let player;
+
+    //Player data
     try {
 
       const response = await http.get(`/player/${result.id}`);
-      
-      setPlayer(response.data);
-      setPlayerIsCreated(true);
+
+      if (response.data !== '') {
+
+        setPlayer(response.data);
+        player = response.data
+
+      }
 
     } catch (e) {
       console.log(e);
     }
-  
 
-  }
-
-  const createPlayer = async () => {
-
-    setGameLogKey(gameLog.length + 1)
-    
+    // location data
 
     try {
 
-      const response = await http.post('/player/create',{
-        id: user.id
-      });
+      const response = await http.get(`/location/${player.location}`);
 
-      setPlayer(response.data);
-      setPlayerIsCreated(true);
+      if (response.data !== '') {
+        console.log(response.data)
+        setLocation(response.data);
 
-      setGameLog([ ...gameLog, { text: messages.playerCreated, key: key }])
+      }
 
     } catch (e) {
       console.log(e);
@@ -114,32 +162,41 @@ export default function Home() {
 
   const action = async (action: string) => {
 
-    setGameLogKey(gameLog.length + 1)
+    let key = gameLogKey;
+    let log = gameLog;
 
-    if (action === "create") {
+    if (
+      action === 'stats' ||
+      action === 'attack' ||
+      action === 'test'
+      ) {
 
-      setGameLog([ ...gameLog, { text: actions.create, key: gameLogKey }])
+      gameAction(action)
+      
+    }
 
-      if (playerIsCreated === true) {
-        setGameLog([ ...gameLog, { text: messages.playerIsCreated, key: gameLogKey }])
-      }
-      if (playerIsCreated === false) {
-        createPlayer();
+
+  }
+
+  const gameAction = async (action) => {
+    
+
+  }
   
-      }
+  const logout = async (e) => {
 
+    e.preventDefault();
+    console.log('klçjçl')
+    try {
+
+      const response = await http.get(`/auth/logout`);
+
+
+    } catch (e) {
+      console.log(e);
     }
-    if (action === "stats") {
-      console.log(player)
-      setGameLog([ ...gameLog, { text: stats, key: gameLogKey }])
 
-    }
-    if (action === "attack") {
-      setGameLog([ ...gameLog, { text: actions.attack, key: gameLogKey }])
-
-    }
-
-
+    authService.logout();
   }
 
   const gameLogs = gameLog.map((log) => (
@@ -148,9 +205,11 @@ export default function Home() {
     </li>
   ));
 
+
     return (
       <>
         <main className="bg-darker h-screen justify-center items-center py-20">
+          <button className="bg-danger text-white py-4 px-2" type="button" onClick={logout} >Logout</button>
           <div className="bg-dark flex flex-col container">
           <div className="bg-black h-128 w-full flex text-white overflow-y-scroll break-words">
           <ul>{gameLogs}</ul>

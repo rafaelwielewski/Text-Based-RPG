@@ -1,10 +1,24 @@
 import authService from "@/lib/services/auth/auth.service";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LoginForm() {
     
     const router = useRouter();
+
+    useEffect(() => {
+
+
+      const authUser = localStorage.getItem('user');
+      
+      if (authUser) {
+        router.push("/");
+        
+      }
+  
+    }, []);
+
     const [errorMessages, setErrorMessages] = useState({ name:'', message: ''});
     const [isSubmitted, setIsSubmitted] = useState(false);
   
@@ -24,9 +38,10 @@ export default function LoginForm() {
       const username = event.target.username.value;
       const password = event.target.password.value;
 
-      authService.login(username, password);
-      console.log(localStorage.getItem('user'))
-      router.push("/");
+      authService.login(username, password)
+
+      router.push("/")
+      
         
   
     };
@@ -111,9 +126,7 @@ export default function LoginForm() {
                 </button>
                 <p className="text-sm font-light text-black">
                   Don’t have an account yet?{" "}
-                  <a href="#" className="font-medium hover:underline text-black">
-                    Sign up
-                  </a>
+                  <Link className="font-medium hover:underline text-black" href="/auth/register">Sign up</Link>
                 </p>
               </form>
             </div>

@@ -1,16 +1,42 @@
-import { SessionProvider } from 'next-auth/react';
-import { useState } from 'react';
-import RefreshTokenHandler from '@/lib/services/auth/refreshTokenHandler';
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
 
-export default function App({ Component, pageProps }: AppProps) {
 
+import { DataProvider } from '@/utils/dataProvider';
+import Head from 'next/head';
+import React, { useEffect } from 'react';
+import { Layout } from '../components/layout';
+import '../styles/globals.css';
+import { ShellProvider } from '../utils/shellProvider';
+
+const App = ({ Component, pageProps }) => {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  
+  useEffect(() => {
+    
+  }, []);
+
+  return (
+    <DataProvider>
+      <ShellProvider>
+        <Head>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+            key="viewport"
+          />
+        </Head>
+        <Layout >
+          <Component {...pageProps} inputRef={inputRef} />
+        </Layout>
+      </ShellProvider>
+            </DataProvider>
+  );
+};
+
+export default (props) => {
 
   return (
 
-    <div className='bg-darker'>
-  <Component {...pageProps} />
-    </div>
-  )
-}
+      <App {...props} />
+
+  );
+};

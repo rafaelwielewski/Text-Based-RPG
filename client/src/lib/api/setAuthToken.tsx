@@ -1,10 +1,11 @@
 
-import axios from 'axios';
+import http from '../services/http';
  
 export const setAuthToken = token => {
    if (token) {
-       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        console.log('token')
+       http.defaults.headers.common["Authorization"] = `Bearer ${token}`;
    }
    else
-       delete axios.defaults.headers.common["Authorization"];
+       delete http.defaults.headers.common["Authorization"];
 }

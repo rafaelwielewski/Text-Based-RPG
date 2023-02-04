@@ -1,6 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-module.exports = {
+const config = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}"
     //"./node_modules/flowbite/**/*.js",
@@ -100,6 +100,7 @@ module.exports = {
   plugins: [
     //require('flowbite/plugin'),
     //require('tw-elements/dist/plugin')
-    require("@tailwindcss/forms")
+    //require("@tailwindcss/forms")
   ],
 }
+module.exports = config;

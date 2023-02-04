@@ -3,8 +3,14 @@ import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Player {
 
+  // @PrimaryGeneratedColumn()
+  // playerId: number;
+
   @PrimaryColumn()
-  id: number;
+  id: string;
+
+  @Column()
+  location: string;
 
   @Column()
   hitpointsxp: number;

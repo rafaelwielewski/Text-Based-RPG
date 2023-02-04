@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import http from "@/lib/services/http";
 import { signIn, signOut } from 'next-auth/react';
 import Email from "next-auth/providers/email";
 import authService from "@/lib/services/auth/auth.service";
 import { useRouter } from "next/router";
+import Link from 'next/link'
 
 export default function RegisterForm() {
-
   const router = useRouter();
+  
+  useEffect(() => {
+
+
+    const authUser = localStorage.getItem('user');
+    
+    if (authUser) {
+      router.push("/");
+      
+    }
+
+  }, []);
+
+
   const [errorMessages, setErrorMessages] = useState({ name:'', message: ''});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -18,6 +32,8 @@ export default function RegisterForm() {
     passmatch: "Your password doesn't match",
 
   };
+
+
 
   const handleSubmit = async (event) => {
 
@@ -59,7 +75,7 @@ export default function RegisterForm() {
 
         console.log(e);
         
-        if (e !== null || e.response.data.message === 'User already exists') {
+        if (e.response.data.message === 'User already exists') {
           setErrorMessages({ name: "username", message: errors.username });
         }
 
@@ -156,13 +172,8 @@ export default function RegisterForm() {
                   Register
                 </button>
                 <p className="text-sm font-light text-black">
-                  Don’t have an account yet?{" "}
-                  <a
-                    href="#"
-                    className="font-medium hover:underline text-black"
-                  >
-                    Sign up
-                  </a>
+                  Already have an anccount?{" "}
+                  <Link className="font-medium hover:underline text-black" href="/auth/login">Sign in</Link>
                 </p>
               </form>
             </div>

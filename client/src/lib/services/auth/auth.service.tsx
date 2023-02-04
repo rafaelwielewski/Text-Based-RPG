@@ -1,9 +1,13 @@
+import { setAuthToken } from "@/lib/api/setAuthToken";
 import http from "@/lib/services/http";
+import { useRouter } from "next/router";
 
 class AuthService {
 
+
+
   login = async (username, password) => {
-    
+
     try {
       http.post("auth/signin", {
         username,
@@ -12,6 +16,9 @@ class AuthService {
       .then(response => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
+          console.log(response.data)
+          setAuthToken(response.data.accessToken)
+
         }
         return response.data;
       });

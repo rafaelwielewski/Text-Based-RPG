@@ -3,10 +3,40 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import Home from './home'
+import Home2 from './home2'
+import Home3 from './home3'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import authService from '@/lib/services/auth/auth.service'
+import { getPlayerData } from '@/api'
+import { useData } from '@/utils/dataProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Index() {
+
+  const router = useRouter();
+  const data = useData();
+
+  useEffect(() => {
+
+    console.log('index')
+
+    const authUser = localStorage.getItem('user');
+    console.log(authUser)
+    if (!authUser) {
+      router.push("/auth/login");
+      
+    } else {
+
+      //authService.getCurrentUser().then(result => setUser(result))
+      //authService.getCurrentUser().then(result => getPlayerData(result))
+      //welcome();
+
+    }
+
+  }, []);
+
   return (
     <>
       <Head>
@@ -16,7 +46,7 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className=''>
-        <Home />
+        <Home3 />
       </main>
     </>
   )

@@ -4,9 +4,32 @@
 
 @font-face {
   font-family: "The Centurion";
-  src: url("../assets/fonts/The Centurion.otf");
+  src: url("../assets/fonts/The Centurion.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "CascadiaCode";
+  src: url("/client/public/fonts/CascadiaCode.woff2") format("woff2"),
+    url("/client/public/fonts/CascadiaCode.ttf") format("truetype");
+}
+
+body {
+  font-family: "CascadiaCode", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.animate-blink {
+  animation: blink-animation 0.5s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+}
+
+@keyframes blink-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .authform {
   width: 800px;
   max-width: 800px;

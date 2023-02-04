@@ -1,8 +1,8 @@
-import { IsNumber, } from 'class-validator';
+import { IsString, } from 'class-validator';
              
 export class CreatePlayerDto {
 
-  @IsNumber()
-  id: number;
+  @IsString()
+  id: string;
 
 }

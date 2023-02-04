@@ -7,6 +7,13 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PlayerService } from './player/player.service';
 import { PlayerModule } from './player/player.module';
+import { ActionModule } from './action/action.module';
+import { LogController } from './log/log.controller';
+import { LogService } from './log/log.service';
+import { LogModule } from './log/log.module';
+import { LocationService } from './location/location.service';
+import { LocationController } from './location/location.controller';
+import { LocationModule } from './location/location.module';
 
 
 @Module({
@@ -36,6 +43,9 @@ import { PlayerModule } from './player/player.module';
     UserModule,
     AuthModule,
     PlayerModule,
+    ActionModule,
+    LogModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

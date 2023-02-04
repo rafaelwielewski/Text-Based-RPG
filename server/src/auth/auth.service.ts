@@ -6,6 +6,8 @@ import { AuthDto } from './dto/auth.dto';
 import { UserService } from 'src/user/user.service';
 import { CreateUserDto } from 'src/user/dto/CreateUserDto';
 import { ForbiddenException } from '@nestjs/common/exceptions';
+import { PlayerService } from 'src/player/player.service';
+import { CreatePlayerDto } from 'src/player/dto/createPlayerDto';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +15,12 @@ export class AuthService {
     private userService: UserService,
     private jwtService: JwtService,
     private configService: ConfigService,
+    private playerService: PlayerService,
   ) {}
+
+  // private user;
+
+
   async signUp(createUserDto: CreateUserDto): Promise<any> {
     // Check if user exists
     const userExists = await this.userService.findByUsername(
@@ -31,6 +38,12 @@ export class AuthService {
     });
     const tokens = await this.getTokens(newUser.id, newUser.username);
     await this.updateRefreshToken(newUser.id, tokens.refreshToken);
+
+    // create player
+    const createPlayerDto = new CreatePlayerDto
+    createPlayerDto.id = newUser.id;
+    this.playerService.create(createPlayerDto);
+
     return tokens;
   }
 
@@ -43,6 +56,8 @@ export class AuthService {
       throw new BadRequestException('Password is incorrect');
     const tokens = await this.getTokens(user.id, user.username);
     await this.updateRefreshToken(user.id, tokens.refreshToken);
+    // this.setUsername(user.username)
+    console.log()
     return tokens;
   }
 
@@ -93,15 +108,32 @@ export class AuthService {
 
   async refreshTokens(userId: string, refreshToken: string) {
     const user = await this.userService.findById(userId);
+    console.log(userId)
     if (!user || !user.refreshToken)
       throw new ForbiddenException('Access Denied');
     const refreshTokenMatches = await argon2.verify(
       user.refreshToken,
       refreshToken,
     );
+    console.log(userId)
+    console.log(user.refreshToken)
+    console.log('iklj')
+    console.log(refreshToken)
     if (!refreshTokenMatches) throw new ForbiddenException('Access Denied');
     const tokens = await this.getTokens(user.id, user.username);
     await this.updateRefreshToken(user.id, tokens.refreshToken);
     return tokens;
   }
+
+  // public setUsername(username) {
+
+  //   return this.user.username = username
+
+  // }
+
+  // public getUsername() {
+
+  //   return this.user.username
+
+  // }
 }

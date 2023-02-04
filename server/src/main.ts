@@ -7,11 +7,11 @@ async function bootstrap() {
   
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: {
-      origin: ['http://localhost:3000', 'http://localhost:8081', 'http://186.211.97.149:8081'],
+      origin: ['http://localhost:3000', 'http://localhost:8081', 'http://186.211.97.183:8081'],
       credentials: true,
     },
   });
-  //app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe());
   // app.listen(8082, () => {
   //   console.log(`Server Started`);
   // });
