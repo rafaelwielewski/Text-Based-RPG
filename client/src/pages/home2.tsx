@@ -2,7 +2,7 @@ import { Input } from "@/components/Input";
 import { useCommands } from "@/hooks/useCommands";
 import { loadCommands } from "@/lib/Command";
 import authService from "@/lib/services/auth/auth.service";
-import useAuthVerify from "@/lib/services/auth/authVerify";
+import useAuthVerify from "@/lib/services/auth/useAuth";
 import * as React from "react";
 import { Route, Routes, useNavigate, redirect } from 'react-router-dom';
 

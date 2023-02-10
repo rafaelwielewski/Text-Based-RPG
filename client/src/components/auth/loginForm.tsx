@@ -58,7 +58,7 @@ export default function LoginForm() {
   return (
     <>
         <main className="">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-4">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-4 ">
               <h1 className="text-5xl font-title leading-tight tracking-tight text-darker">
                 Sign in to your account
               </h1>

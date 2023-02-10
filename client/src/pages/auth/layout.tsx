@@ -6,7 +6,7 @@ export default function LoginLayout({
   return (
     <section>
       <div className="">
-      <div className="flex grid grid-cols-12 justify-items-center justify-center">
+      <div className="bg-darkest h-full flex grid grid-cols-12 justify-items-center justify-center">
         <span className="flex col-span-12 text-primary text-title font-title">
           Writtem Kingdom
         </span>
