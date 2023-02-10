@@ -1,85 +1,81 @@
-import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { IsString, IsNumber } from 'class-validator';
 
-@Entity()
-export class Player {
-  // @PrimaryGeneratedColumn()
-  // playerId: number;
-
-  @PrimaryColumn()
+export class PlayerDto {
+  @IsString()
   id: string;
 
-  @Column()
+  @IsString()
   location: string;
 
-  @Column()
+  @IsString()
   training: string;
 
-  @Column()
+  @IsNumber()
   combatLvl: number;
 
-  @Column()
+  @IsNumber()
   hitpointsLvl: number;
 
-  @Column()
+  @IsNumber()
   attackLvl: number;
 
-  @Column()
+  @IsNumber()
   strenghtLvl: number;
 
-  @Column()
+  @IsNumber()
   defenceLvl: number;
 
-  @Column()
+  @IsNumber()
   hitpointsXP: number;
 
-  @Column()
+  @IsNumber()
   attackXP: number;
 
-  @Column()
+  @IsNumber()
   strenghtXP: number;
 
-  @Column()
+  @IsNumber()
   defenceXP: number;
 
-  @Column()
+  @IsNumber()
   hitpointsMax: number;
 
-  @Column()
+  @IsNumber()
   hitpoints: number;
 
-  @Column()
+  @IsNumber()
   attackBonus: number;
 
-  @Column()
+  @IsNumber()
   strenghtBonus: number;
 
-  @Column()
+  @IsNumber()
   defenceBonus: number;
 
-  @Column()
+  @IsString()
   weapon: string;
 
-  @Column()
+  @IsString()
   chest: string;
 
-  @Column()
+  @IsString()
   legs: string;
 
-  @Column()
+  @IsString()
   head: string;
 
-  @Column()
+  @IsString()
   shield: string;
 
-  @Column()
+  @IsString()
   hands: string;
 
-  @Column()
+  @IsString()
   feet: string;
 
-  @Column()
+  @IsString()
   neck: string;
 
-  @Column()
+  @IsString()
   ring: string;
 }

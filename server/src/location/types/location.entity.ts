@@ -25,7 +25,7 @@ export class Location {
   action: string;
 
   @Column()
-  enemyName: string;
+  monsterName: string;
 
   @Column()
   shopName: string;

@@ -3,12 +3,10 @@
 import { DataProvider } from '@/utils/dataProvider';
 import Head from 'next/head';
 import React, { useEffect } from 'react';
-import { Layout } from '../components/layout';
 import '../styles/globals.css';
-import { ShellProvider } from '../utils/shellProvider';
 
 const App = ({ Component, pageProps }) => {
-  const inputRef = React.useRef<HTMLInputElement>(null);
+
   
   useEffect(() => {
     
@@ -16,7 +14,6 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <DataProvider>
-      <ShellProvider>
         <Head>
           <meta
             name="viewport"
@@ -24,10 +21,9 @@ const App = ({ Component, pageProps }) => {
             key="viewport"
           />
         </Head>
-        <Layout >
-          <Component {...pageProps} inputRef={inputRef} />
-        </Layout>
-      </ShellProvider>
+        <div className='bg-darkest h-screen'>
+          <Component {...pageProps} />
+          </div>
             </DataProvider>
   );
 };

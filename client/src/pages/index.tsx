@@ -10,30 +10,41 @@ import { useRouter } from 'next/router'
 import authService from '@/lib/services/auth/auth.service'
 import { getPlayerData } from '@/api'
 import { useData } from '@/utils/dataProvider'
+import { Route, Routes, useNavigate, redirect } from 'react-router-dom';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Index() {
 
   const router = useRouter();
+  //const navigate = useNavigate();
   const data = useData();
 
   useEffect(() => {
 
     console.log('index')
 
-    const authUser = localStorage.getItem('user');
-    console.log(authUser)
-    if (!authUser) {
-      router.push("/auth/login");
-      
-    } else {
+    const loader = async () => {
+      const user = await authService.isAuth();
+      if (!user) {
+        return redirect("/auth/login");
+      }
+    };
 
-      //authService.getCurrentUser().then(result => setUser(result))
-      //authService.getCurrentUser().then(result => getPlayerData(result))
-      //welcome();
+    // authService.isAuth().then(async (result) => {
+    //   if (!result) {
 
-    }
+
+    //     setTimeout(() => {
+    //       // 👇 Redirects to about page, note the `replace: true`
+    //       navigate('/auth/login', { replace: true });
+    //     }, 3000)
+
+
+    //     //await router.push("/auth/login");
+    //   }
+    // })
 
   }, []);
 
@@ -46,7 +57,7 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className=''>
-        <Home3 />
+        <Home2 />
       </main>
     </>
   )

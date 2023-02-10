@@ -5,6 +5,7 @@ import Email from "next-auth/providers/email";
 import authService from "@/lib/services/auth/auth.service";
 import { useRouter } from "next/router";
 import Link from 'next/link'
+import { redirect } from 'react-router-dom';
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -12,12 +13,12 @@ export default function RegisterForm() {
   useEffect(() => {
 
 
-    const authUser = localStorage.getItem('user');
-    
-    if (authUser) {
-      router.push("/");
-      
-    }
+    const loader = async () => {
+      const user = await authService.isAuth();
+      if (user) {
+        return redirect("/");
+      }
+    };
 
   }, []);
 
@@ -65,8 +66,9 @@ export default function RegisterForm() {
 
         if (response.statusText === "Created") {
 
-          authService.login(username, password)
-          router.push("/");
+          await authService.login(username, password).then(async (result) => {
+            await router.push("/")
+          })
           
         }
 

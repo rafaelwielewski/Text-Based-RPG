@@ -13,14 +13,15 @@ class AuthService {
         username,
         password
       })
-      .then(response => {
+      .then(async response => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
           console.log(response.data)
           setAuthToken(response.data.accessToken)
 
         }
-        return response.data;
+        console.log(response.data)
+        return await response.data;
       });
 
     } catch (e) {
@@ -30,6 +31,17 @@ class AuthService {
   };
 
   async logout() {
+
+    try {
+
+      const response = await http.get(`/auth/logout`);
+      console.log(response)
+
+    } catch (e) {
+      console.log(e);
+    }
+
+ 
     localStorage.removeItem("user");
   }
 
@@ -52,6 +64,10 @@ class AuthService {
     const user = JSON.parse(localStorage.getItem('user'));
     const decodedJwt = this.decodeJwt(user.accessToken);
     return decodedJwt
+  }
+  async isAuth() {
+    const user = localStorage.getItem('user');
+    return user
   }
 }
 

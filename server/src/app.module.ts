@@ -5,15 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService, ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { PlayerService } from './player/player.service';
 import { PlayerModule } from './player/player.module';
 import { ActionModule } from './action/action.module';
-import { LogController } from './log/log.controller';
-import { LogService } from './log/log.service';
 import { LogModule } from './log/log.module';
-import { LocationService } from './location/location.service';
-import { LocationController } from './location/location.controller';
 import { LocationModule } from './location/location.module';
+import { MonsterModule } from './monster/monster.module';
+import { FightController } from './fight/fight.controller';
+import { FightService } from './fight/fight.service';
+import { FightModule } from './fight/fight.module';
 
 
 @Module({
@@ -46,8 +45,10 @@ import { LocationModule } from './location/location.module';
     ActionModule,
     LogModule,
     LocationModule,
+    MonsterModule,
+    FightModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, FightController],
+  providers: [AppService, FightService],
 })
 export class AppModule {}

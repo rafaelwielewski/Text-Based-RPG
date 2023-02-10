@@ -1,8 +1,8 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 const config = {
   content: [
-    "./src/**/*.{js,ts,jsx,tsx}"
+    './src/**/*.{js,ts,jsx,tsx}',
     //"./node_modules/flowbite/**/*.js",
     //"./node_modules/flowbite-react/**/*.js",
     //'./node_modules/tw-elements/dist/js/**/*.js',
@@ -10,13 +10,13 @@ const config = {
   theme: {
     borderWidth: {
       DEFAULT: '1px',
-      '0': '0',
-      '1': '1px',
-      '2': '2px',
-      '3': '3px',
-      '4': '4px',
-      '6': '6px',
-      '8': '8px',
+      0: '0',
+      1: '1px',
+      2: '2px',
+      3: '3px',
+      4: '4px',
+      6: '6px',
+      8: '8px',
     },
     container: {
       center: true,
@@ -26,17 +26,16 @@ const config = {
         lg: '1024px',
         xl: '1280px',
         '2xl': '1280px',
-
       },
     },
     fontFamily: {
       sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-      'title': ['The Centurion'],
+      title: ['The Centurion'],
     },
     fontSize: {
       xs: '0.875rem',
       sm: '1rem',
-      base: '1.25rem',
+      md: '1.25rem',
       lg: '1.5rem',
       xl: '1.875rem',
       '2xl': '2.25rem',
@@ -44,7 +43,7 @@ const config = {
       '4xl': '3rem',
       '5xl': '4rem',
       '6xl': 'rem',
-      'title': '8rem',
+      title: '8rem',
       // xs: '0.75',
       // sm: '0.875rem',
       // base: '1.0rem',
@@ -55,30 +54,28 @@ const config = {
       // '4xl': '2.25rem',
       // '5xl': '3rem',
       // '6xl': 'rem',
-
     },
     extend: {
       width: {
-        '128': '32rem',
-        '156': '39rem',
-        '192': '48rem',
-        '200': '50rem',
+        128: '32rem',
+        156: '39rem',
+        192: '48rem',
+        200: '50rem',
       },
       height: {
-        '128': '32rem',
-        '156': '39rem',
-        '192': '48rem',
-        '200': '50rem',
+        128: '32rem',
+        156: '39rem',
+        192: '48rem',
+        200: '50rem',
       },
       screens: {
-        'auth': '100px',
+        auth: '100px',
       },
       colors: {
         primary: '#efd1a9',
         secondary: '#998c6c',
         tertiary: '#4b4e69',
-        blue: '#1DA1F2',
-        //green: '#00ba7c',
+        //blue: '#1DA1F2',
         whitest: '#FFFFFF',
         darkblue: '#2795D9',
         lightblue: '#EFF9FF',
@@ -102,5 +99,5 @@ const config = {
     //require('tw-elements/dist/plugin')
     //require("@tailwindcss/forms")
   ],
-}
+};
 module.exports = config;

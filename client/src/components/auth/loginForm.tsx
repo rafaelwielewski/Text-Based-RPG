@@ -2,20 +2,27 @@ import authService from "@/lib/services/auth/auth.service";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { redirect } from 'react-router-dom';
 
 export default function LoginForm() {
     
     const router = useRouter();
 
     useEffect(() => {
+      console.log('teladelogin')
 
-
-      const authUser = localStorage.getItem('user');
+      const loader = async () => {
+        const user = await authService.isAuth();
+        if (user) {
+          return redirect("/");
+        }
+      };
+      // const authUser = localStorage.getItem('user');
       
-      if (authUser) {
-        router.push("/");
+      // if (authUser) {
+      //   router.push("/");
         
-      }
+      // }
   
     }, []);
 
@@ -38,12 +45,10 @@ export default function LoginForm() {
       const username = event.target.username.value;
       const password = event.target.password.value;
 
-      authService.login(username, password)
+      await authService.login(username, password).then(async (result) => {
+        await router.push("/")
+      })
 
-      router.push("/")
-      
-        
-  
     };
   
     const renderErrorMessage = (name: String) =>

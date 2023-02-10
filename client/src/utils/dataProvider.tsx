@@ -23,7 +23,7 @@ export interface DataContextType {
     const [user, setUser] = useState({});
     const [player, setPlayer] = useState({});
     const [location, _setLocation] = useState({})  
-
+    
     useEffect(() => {
         // console.log(localStorage.getItem('user'))
         // const userData = getCurrentUser()
