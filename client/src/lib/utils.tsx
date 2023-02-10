@@ -1,11 +1,10 @@
 export function getCommandName(args: string[]) {
   const [_commandName, ...rest] = args;
 
-  const isSudo = _commandName === "sudo" && rest.length >= 1;
-  const commandName = isSudo ? rest[0] : _commandName;
-  const commandArgs = isSudo ? rest.slice(1, rest.length) : rest;
+  const commandName = _commandName;
+  const commandArgs = rest;
 
-  return { isSudo, commandArgs, commandName };
+  return { commandArgs, commandName };
 }
 
 export function classNames(...classNames: unknown[]) {
@@ -20,11 +19,11 @@ export type CommandOutputFunc = (options: CommandOutputOptions) => JSX.Element |
 
 export const initBanner: CommandOutputFunc = () => (
   <p className="">
-    <span className="block font-title text-title text-orange-300 text-center">
+    <span className="block font-title text-title text-orange-300 text-center leading-normal">
       {`Written Kingdom`}
     </span>
     <span className="block mt-3 text-center text-white text-base">
-      {"Welcome to this epic site! Enter 'help' to see list of available commands."}
+      {"Welcome! Enter 'help' to see list of available commands."}
     </span>
   </p>
 );

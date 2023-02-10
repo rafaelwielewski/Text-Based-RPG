@@ -1,16 +1,22 @@
 import { Input } from "@/components/Input";
 import { useCommands } from "@/hooks/useCommands";
 import { loadCommands } from "@/lib/Command";
+import authService from "@/lib/services/auth/auth.service";
+import useAuthVerify from "@/lib/services/auth/authVerify";
 import * as React from "react";
+import { Route, Routes, useNavigate, redirect } from 'react-router-dom';
 
 
 export default function App() {
+
   const containerRef = React.useRef<HTMLDivElement>(null);
   const commands = useCommands();
+  
 
   const _loadCommands = React.useCallback(async () => {
     commands.state.setCommandMap(await loadCommands());
   }, []); // eslint-disable-line
+
 
   React.useEffect(() => {
     _loadCommands();

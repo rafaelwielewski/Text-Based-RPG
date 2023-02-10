@@ -110,29 +110,19 @@ export function useCommands() {
         output: response,
         args: commandArgs,
       });
+      if (fight) {
+        do{
 
-      do{
-
-      fight = await attack.attack(fight)
-      const response = attack.render(fight)
-      _addCommandToEntries(idx, {
-        status: CommandStatus.Succeeded,
-        command: fullCommand,
-        output: response,
-        args: commandArgs,
-      });
-    } while (fight.player.hitpoints > 0 && fight.monster.hitpoints > 0)
-
-    // if (fight.monster.hitpoints === 0) {
-    //   fight = await attack.monsterKiller(fight)
-    //   const response = attack.render(fight)
-    //   _addCommandToEntries(idx, {
-    //     status: CommandStatus.Succeeded,
-    //     command: fullCommand,
-    //     output: response,
-    //     args: commandArgs,
-    //   });
-    // }
+          fight = await attack.attack(fight)
+          const response = attack.render(fight)
+          _addCommandToEntries(idx, {
+            status: CommandStatus.Succeeded,
+            command: fullCommand,
+            output: response,
+            args: commandArgs,
+          });
+        } while (fight.player.hitpoints > 0 && fight.monster.hitpoints > 0) 
+      }
     }
 
     else{

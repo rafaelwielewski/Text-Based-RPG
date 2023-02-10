@@ -6,19 +6,12 @@ import authService from "@/lib/services/auth/auth.service";
 import { useRouter } from "next/router";
 import Link from 'next/link'
 import { redirect } from 'react-router-dom';
+import useAuthVerify from "@/lib/services/auth/useAuth";
 
 export default function RegisterForm() {
   const router = useRouter();
   
   useEffect(() => {
-
-
-    const loader = async () => {
-      const user = await authService.isAuth();
-      if (user) {
-        return redirect("/");
-      }
-    };
 
   }, []);
 

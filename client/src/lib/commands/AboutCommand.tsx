@@ -6,6 +6,6 @@ export default class AboutCommand extends Command {
   }
 
   render(): string | JSX.Element {
-    return <p>{"I'm Casper, a front-end focused web developer with over 3 years experience."}</p>;
+    return <p>{"I'm Rafael Wielwski, I'm learning to be a backend developer. I hope you like my game!! Thanks For playing."}</p>;
   }
 }

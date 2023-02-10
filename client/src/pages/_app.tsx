@@ -1,5 +1,6 @@
 
 
+import useAuthVerify from '@/lib/services/auth/useAuth';
 import { DataProvider } from '@/utils/dataProvider';
 import Head from 'next/head';
 import React, { useEffect } from 'react';
@@ -7,7 +8,7 @@ import '../styles/globals.css';
 
 const App = ({ Component, pageProps }) => {
 
-  
+  const auth = useAuthVerify();
   useEffect(() => {
     
   }, []);

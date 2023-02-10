@@ -45,11 +45,6 @@ export async function loadCommands() {
   const commands = await Promise.all([
     import("./commands/HelpCommand"),
     import("./commands/AboutCommand"),
-    import("./commands/WhoamiCommand"),
-    import("./commands/DateCommand"),
-    import("./commands/RepoCommand"),
-    import("./commands/SudoCommand"),
-    import("./commands/NeofetchCommand"),
     import("./commands/TestCommand"),
     import("./commands/LocationCommand"),
     import("./commands/MoveCommand"),

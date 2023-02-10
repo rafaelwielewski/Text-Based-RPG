@@ -25,12 +25,13 @@ export default function Index() {
 
     console.log('index')
 
-    const loader = async () => {
-      const user = await authService.isAuth();
-      if (!user) {
-        return redirect("/auth/login");
-      }
-    };
+    // const loader = async () => {
+    //   const user = await authService.isAuth();
+    //   console.log('kjkljkl')
+    //   if (!user) {
+    //     return redirect("/auth/login");
+    //   }
+    // };
 
     // authService.isAuth().then(async (result) => {
     //   if (!result) {

@@ -11,7 +11,17 @@ export default class AttackCommand extends Command {
   };
 
   async getMonster(player, location) {
-    return await fightStart(player.id, location.monsterName);
+    console.log(location.monsterName)
+    if (location.monsterName !== 'Nothing') {
+      const fight = await fightStart(player.id, location.monsterName);
+      if (fight.monster === null) {
+        return null;
+      } else {
+        return fight;
+      }
+    } else {
+      return null;
+    }
   }
 
   async attack(fight) {
@@ -27,6 +37,10 @@ export default class AttackCommand extends Command {
 
   render(fight): string | JSX.Element {
     let render: string | JSX.Element;
+    if (fight === null) {
+      render = (<div>There are no enemies to attack</div>)
+      return render;
+    }
     if (fight.player.hitpoints > 0 && fight.monster.hitpoints > 0) {
       render = (
         <div className="">
@@ -38,7 +52,7 @@ export default class AttackCommand extends Command {
               {fight.username} - Level {fight.player.combatLvl}
             </span>
             <span className=""> | HP: {fight.player.hitpoints}</span>
-            <span className="">(- X)</span>
+            { fight.playerHit === 0 ? <span className="text-blue-400">(-{fight.monsterHit})</span> : <span className="text-red-500">(-{fight.monsterHit})</span>}
           </p>
           <p className="text-center pb-4">X</p>
           <p className="text-center pb-4">
@@ -46,10 +60,11 @@ export default class AttackCommand extends Command {
               {fight.monster.name} - Level {fight.monster.lvl}
             </span>
             <span className=""> | HP: {fight.monster.hitpoints}</span>
-            <span className="">(- X)</span>
+            { fight.playerHit === 0 ? <span className="text-blue-400">(-{fight.playerHit})</span> : <span className="text-red-500">(-{fight.playerHit})</span>}
           </p>
         </div>
       );
+      return render;
     }
     if (fight.player.hitpoints === 0) {
       render = (
@@ -59,6 +74,7 @@ export default class AttackCommand extends Command {
           </p>
         </div>
       );
+      return render;
     }
     if (fight.monster.hitpoints === 0) {
 
@@ -97,8 +113,8 @@ export default class AttackCommand extends Command {
 
         </div>
       );
+      return render;
     }
-
     return render;
   }
 }

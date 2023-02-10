@@ -1,30 +1,27 @@
 import authService from "@/lib/services/auth/auth.service";
+import useAuthVerify from "@/lib/services/auth/useAuth";
+import useAuth from "@/lib/services/auth/useAuth2";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { redirect } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
     
     const router = useRouter();
 
     useEffect(() => {
-      console.log('teladelogin')
-
-      const loader = async () => {
-        const user = await authService.isAuth();
-        if (user) {
-          return redirect("/");
-        }
-      };
-      // const authUser = localStorage.getItem('user');
-      
-      // if (authUser) {
-      //   router.push("/");
-        
-      // }
   
     }, []);
+
+    // const loader = async () => {
+    //   console.log('ksdjlj')
+    //   const user = await authService.isAuth();
+    //   if (user) {
+    //     console.log('tem')
+    //     ("/");
+    //   }
+    // };
 
     const [errorMessages, setErrorMessages] = useState({ name:'', message: ''});
     const [isSubmitted, setIsSubmitted] = useState(false);

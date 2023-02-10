@@ -1,29 +1,35 @@
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import authService from '@/lib/services/auth/auth.service';
 
-export default function useAuth(shouldRedirect) {
-    const { data: session } = useSession();
-    const router = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+export default function useAuth() {
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    useEffect(() => {
-        if (session?.error === "RefreshAccessTokenError") {
-            signOut({ callbackUrl: '/auth/login', redirect: shouldRedirect });
-        }
+  useEffect(() => {
+    loader();
+  }, []);
 
-        if (session === null) {
-            if (router.route !== '/auth/login') {
-                router.replace('/auth/login');
-            }
-            setIsAuthenticated(false);
-        } else if (session !== undefined) {
-            if (router.route === '/auth/login') {
-                router.replace('/');
-            }
-            setIsAuthenticated(true);
-        }
-    }, [session]);
+  const loader = async () => {
+    
+    const session = await authService.isAuth();
 
-    return isAuthenticated;
+    //   if (session?.error === "RefreshAccessTokenError") {
+    //     signOut({ callbackUrl: '/auth/login' });
+    // }
+    console.log(session)
+    if (session === null) {
+      if (router.route !== '/auth/login' || '/auth/register') {
+        router.replace('/auth/login');
+      }
+      setIsAuthenticated(false);
+    } else if (session !== undefined) {
+      if (router.route === '/auth/login' || '/auth/register') {
+        router.replace('/');
+      }
+      setIsAuthenticated(true);
+    }
+  };
+
+  return isAuthenticated;
 }
