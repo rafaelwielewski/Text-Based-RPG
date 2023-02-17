@@ -13,6 +13,11 @@ import { MonsterModule } from './monster/monster.module';
 import { FightController } from './fight/fight.controller';
 import { FightService } from './fight/fight.service';
 import { FightModule } from './fight/fight.module';
+import { DropModule } from './drop/drop.module';
+import { InventoryModule } from './inventory/inventory.module';
+import { ItemModule } from './item/item.module';
+import { FoodModule } from './food/food.module';
+import { EquipmentModule } from './equipment/equipment.module';
 
 
 @Module({
@@ -47,6 +52,11 @@ import { FightModule } from './fight/fight.module';
     LocationModule,
     MonsterModule,
     FightModule,
+    DropModule,
+    InventoryModule,
+    ItemModule,
+    FoodModule,
+    EquipmentModule,
   ],
   controllers: [AppController, FightController],
   providers: [AppService, FightService],

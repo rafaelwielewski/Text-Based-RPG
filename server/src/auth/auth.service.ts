@@ -8,6 +8,7 @@ import { CreateUserDto } from 'src/user/dto/CreateUserDto';
 import { ForbiddenException } from '@nestjs/common/exceptions';
 import { PlayerService } from 'src/player/player.service';
 import { CreatePlayerDto } from 'src/player/dto/createPlayerDto';
+import { InventoryService } from 'src/inventory/inventory.service';
 
 @Injectable()
 export class AuthService {
@@ -16,6 +17,7 @@ export class AuthService {
     private jwtService: JwtService,
     private configService: ConfigService,
     private playerService: PlayerService,
+    private inventoryService: InventoryService,
   ) {}
 
   // private user;
@@ -40,9 +42,10 @@ export class AuthService {
     await this.updateRefreshToken(newUser.id, tokens.refreshToken);
 
     // create player
-    const createPlayerDto = new CreatePlayerDto
+    const createPlayerDto = new CreatePlayerDto();
     createPlayerDto.id = newUser.id;
     this.playerService.create(createPlayerDto);
+    this.inventoryService.create(newUser.id);
 
     return tokens;
   }

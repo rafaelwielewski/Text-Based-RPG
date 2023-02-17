@@ -6,9 +6,15 @@ import { AccessTokenStrategy } from './strategies/accessToken.strategy';
 import { RefreshTokenStrategy } from './strategies/refreshToken.strategy';
 import { UserModule } from 'src/user/user.module';
 import { PlayerModule } from 'src/player/player.module';
+import { InventoryModule } from 'src/inventory/inventory.module';
 
 @Module({
-  imports: [JwtModule.register({}), forwardRef(() => UserModule), PlayerModule],
+  imports: [
+    JwtModule.register({}),
+    forwardRef(() => UserModule),
+    PlayerModule,
+    InventoryModule,
+  ],
   controllers: [AuthController],
   providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy],
   exports: [AuthService],

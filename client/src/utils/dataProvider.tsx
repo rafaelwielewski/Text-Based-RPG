@@ -6,7 +6,9 @@ export interface DataContextType {
     user;
     player;
     location;
+    drop,
     setLocation(output);
+    setDrop(output);
 
   }
   
@@ -22,7 +24,8 @@ export interface DataContextType {
 
     const [user, setUser] = useState({});
     const [player, setPlayer] = useState({});
-    const [location, _setLocation] = useState({})  
+    const [location, _setLocation] = useState({})
+    const [drop, _setDrop] = useState()   
     
     useEffect(() => {
         // console.log(localStorage.getItem('user'))
@@ -55,6 +58,10 @@ export interface DataContextType {
 
 
       };
+      const setDrop = (output) => {
+        console.log(output)
+        _setDrop(output);
+      };
 
     return (
       <DataContext.Provider
@@ -62,7 +69,9 @@ export interface DataContextType {
           user,
           player,
           location,
+          drop,
           setLocation,
+          setDrop,
         }}
       >
         {children}

@@ -4,10 +4,13 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: {
-      origin: ['http://localhost:3000', 'http://localhost:8081', 'http://186.211.97.168:8081'],
+      origin: [
+        'http://localhost:3000',
+        'http://localhost:8081',
+        'http://186.211.97.242:8081',
+      ],
       credentials: true,
     },
   });

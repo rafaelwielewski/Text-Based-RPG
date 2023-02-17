@@ -17,88 +17,75 @@ import { messages } from './types/messages.entity';
 
 @Injectable()
 export class ActionService {
-    constructor(
-        //@InjectRepository(Action)
+  constructor(
+    //@InjectRepository(Action)
     //private playerRepository: Repository<Action>,
     private playerService: PlayerService,
     private logService: LogService,
     private userService: UserService,
-
   ) {}
 
   private isPlayerCreated: boolean = true;
   private isPlayerLogged: boolean = false;
   private user;
-  private player: Player; 
+  private player: Player;
   private logs = [];
   private logsKey: number = NaN;
 
-  async create(createDto: CreateDto) 
-  {
-    const { id } = createDto
+  async create(createDto: CreateDto) {
+    const { id } = createDto;
 
-    const createPlayerDto = new CreatePlayerDto
+    const createPlayerDto = new CreatePlayerDto();
     createPlayerDto.id = id;
     return this.playerService.create(createPlayerDto);
-
   }
 
-  async login(loginDto: LoginDto) 
-  {
-    const { id } = loginDto
-    
+  async login(loginDto: LoginDto) {
+    const { id } = loginDto;
+
     return this.playerService.findById(id);
-
   }
-    
 
-  async action(actionDto: ActionDto) 
-  {
-    
+  async action(actionDto: ActionDto) {
     const { id, input } = actionDto;
 
     const action = new Action();
-    action.id = id
-    action.input = input
-    action.isPlayerLogged = false //test
-    action.isPlayerCreated = false //test
-    
-    if (action.input === "create") {
-            
-        if (action.isPlayerCreated === false) {
+    action.id = id;
+    action.input = input;
+    action.isPlayerLogged = false; //test
+    action.isPlayerCreated = false; //test
 
-            const createPlayerDto = new CreatePlayerDto
-            createPlayerDto.id = action.id;
-            return await this.playerService.create(createPlayerDto);
-        }
-        if (action.isPlayerCreated === true) {
-            //setGameLog(log);
-        }
+    if (action.input === 'create') {
+      if (action.isPlayerCreated === false) {
+        const createPlayerDto = new CreatePlayerDto();
+        createPlayerDto.id = action.id;
+        return await this.playerService.create(createPlayerDto);
+      }
+      if (action.isPlayerCreated === true) {
+        //setGameLog(log);
+      }
     }
-    if (action.input === "login") {
-            
-        if (this.isPlayerCreated === false) {
+    if (action.input === 'login') {
+      if (this.isPlayerCreated === false) {
+        this.logs.push(
+          this.logService.setLog({ id: 1, text: messages.welcome }),
+        );
+        this.logs.push(this.logService.setLog({ id: 2, text: 'idasdasdj' }));
+        console.log(this.logService.getLog());
+        return this.logs;
+      }
+      if (this.isPlayerCreated === true) {
+        this.user = this.userService.findById(action.id);
+        //this.logs.push(this.logService.setLog({id: 1, text: messages.welcome}))
+        //this.logs.push(this.logService.setLog({id: 2, text: 'idasdasdj'}))
 
-            this.logs.push(this.logService.setLog({id: 1, text: messages.welcome}))
-            this.logs.push(this.logService.setLog({id: 2, text: 'idasdasdj'}))
-            console.log(this.logService.getLog());
-            return this.logs;
-        }
-        if (this.isPlayerCreated === true) {
-
-            this.user = this.userService.findById(action.id);
-            //this.logs.push(this.logService.setLog({id: 1, text: messages.welcome}))
-            //this.logs.push(this.logService.setLog({id: 2, text: 'idasdasdj'}))
-
-            return this.user;
-
-        }
-    } 
-    if (action.input === "test") {
-        console.log(this.user);
         return this.user;
+      }
     }
-
+    if (action.input === 'test') {
+      console.log(this.user);
+      return this.user;
+    }
 
     //return this.playerRepository.save(createdPlayer);
   }

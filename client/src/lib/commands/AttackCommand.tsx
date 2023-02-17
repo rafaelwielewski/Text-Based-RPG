@@ -57,7 +57,7 @@ export default class AttackCommand extends Command {
           <p className="text-center pb-4">X</p>
           <p className="text-center pb-4">
             <span className="text-red-400">
-              {fight.monster.name} - Level {fight.monster.lvl}
+              {fight.monster.name} - Level {fight.monster.combatLvl}
             </span>
             <span className=""> | HP: {fight.monster.hitpoints}</span>
             { fight.playerHit === 0 ? <span className="text-blue-400">(-{fight.playerHit})</span> : <span className="text-red-500">(-{fight.playerHit})</span>}
@@ -85,6 +85,9 @@ export default class AttackCommand extends Command {
           </p>
           <p className="pb-4">
             You received {fight.monster.xp} xp.
+          </p>
+          <p className="pb-4">
+            Your loot: {fight.drops}.
           </p>
           { 
             fight.lvlUp.attackLvlUp || 

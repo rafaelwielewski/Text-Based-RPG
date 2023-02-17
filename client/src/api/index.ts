@@ -136,3 +136,17 @@ export const attackApi = async (fight) => {
 }
 };
 
+export const getLoot = async (drop) => {
+  try{
+  const { data } = await http.post(
+    `inventory/lootall`,{
+      drop: drop,
+    }
+  );
+
+  return data;
+} catch (error) {
+  console.log(error);
+}
+};
+

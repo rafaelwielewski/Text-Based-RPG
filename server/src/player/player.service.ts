@@ -168,9 +168,12 @@ export class PlayerService {
     return index;
   }
 
-  async test() {
-    const maxHit = Math.round(((50 + 8 + 3) * (1 + 50) + 250) / 500);
-    return maxHit;
+  async loot(drop): Promise<Player> {
+    const { id, location } = movePlayerDto;
+    const movePlayer = new Player();
+    movePlayer.id = id;
+    movePlayer.location = location;
+    return this.playerRepository.save(movePlayer);
   }
 
   async findById(id: string) {

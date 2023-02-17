@@ -1,4 +1,5 @@
 import AttackCommand from "@/lib/commands/AttackCommand";
+import LootCommand from "@/lib/commands/LootCommand";
 import MoveCommand from "@/lib/commands/MoveCommand";
 import TestCommand from "@/lib/commands/TestCommand";
 import { useData } from "@/utils/dataProvider";
@@ -30,7 +31,7 @@ const useCommandsStore = create<CommandStore>((set) => ({
 }));
 
 export function useCommands() {
-  const { user, player, location, setLocation}  = useData();
+  const { user, player, location, drop, setLocation, setDrop}  = useData();
   const state = useCommandsStore();
   const commandsArr = React.useMemo(() => Array.from(state.commandMap.keys()), [state.commandMap]);
 
@@ -75,7 +76,24 @@ export function useCommands() {
 
       return;
     }
-    
+
+    if (commandName === "loot") {
+      const loot = new LootCommand;
+      const response = await loot.render(args, drop)
+      
+    if (response.data === 'looted') {
+      setDrop('')
+    }
+    return _addCommandToEntries(idx, {
+      status: CommandStatus.Succeeded,
+      command: fullCommand,
+      output: response.render,
+      args: commandArgs,
+    });
+  }
+
+  setDrop('')
+  
     if (commandName === "move") {
       const response =
         await command.render({
@@ -122,6 +140,9 @@ export function useCommands() {
             args: commandArgs,
           });
         } while (fight.player.hitpoints > 0 && fight.monster.hitpoints > 0) 
+      }
+      if (fight.drop) {
+        setDrop(fight.drop)
       }
     }
 

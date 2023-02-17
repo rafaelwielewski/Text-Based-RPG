@@ -36,11 +36,6 @@ export abstract class Command extends React.Component {
 //   abstract execute(renderOptions: CommandRenderOptions) ;
 // }
 
-
-
-
-
-
 export async function loadCommands() {
   const commands = await Promise.all([
     import("./commands/HelpCommand"),
@@ -49,6 +44,9 @@ export async function loadCommands() {
     import("./commands/LocationCommand"),
     import("./commands/MoveCommand"),
     import("./commands/AttackCommand"),
+    import("./commands/StatsCommand"),
+    import("./commands/EquipmentCommand"),
+    import("./commands/LootCommand"),
   ]);
 
   for (const file of commands) {

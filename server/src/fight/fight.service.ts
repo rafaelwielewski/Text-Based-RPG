@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { DropService } from 'src/drop/drop.service';
 import { MonsterService } from 'src/monster/monster.service';
 import { PlayerService } from 'src/player/player.service';
 import { UserService } from 'src/user/user.service';
@@ -11,6 +12,7 @@ export class FightService {
     private playerService: PlayerService,
     private monsterService: MonsterService,
     private userService: UserService,
+    private dropService: DropService,
   ) {}
 
   async fightStart(fightStartDto: FightStartDto) {
@@ -78,13 +80,15 @@ export class FightService {
     player.hitpoints = player.hitpoints - monsterHit;
     monster.hitpoints = monster.hitpoints - playerHit;
     let lvlUp;
+    let drop;
     if (player.hitpoints < 0) {
       player.hitpoints = 0;
     }
     if (monster.hitpoints <= 0) {
       monster.hitpoints = 0;
       lvlUp = await this.playerService.gainXp(player.id, monster.xp);
-      console.log(lvlUp);
+      drop = await this.dropService.getDrop(monster.name);
+
     }
     // save player hp
     const fight = {
@@ -94,6 +98,7 @@ export class FightService {
       playerHit,
       monsterHit,
       lvlUp,
+      drop,
     };
     return fight;
   }
