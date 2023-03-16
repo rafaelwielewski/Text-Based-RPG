@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EquipmentModule } from 'src/equipment/equipment.module';
+import { InventoryModule } from 'src/inventory/inventory.module';
+import { ItemModule } from 'src/item/item.module';
 import { LocationModule } from 'src/location/location.module';
 import { MonsterModule } from 'src/monster/monster.module';
 import { UserModule } from 'src/user/user.module';
@@ -12,7 +15,10 @@ import { Player } from './types/player.entity';
     TypeOrmModule.forFeature([Player]),
     LocationModule,
     MonsterModule,
-    UserModule
+    UserModule,
+    ItemModule,
+    InventoryModule,
+    EquipmentModule,
   ],
   controllers: [PlayerController],
   providers: [PlayerService],

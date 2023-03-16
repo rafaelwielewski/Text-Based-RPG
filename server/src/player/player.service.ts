@@ -1,5 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { EquipmentService } from 'src/equipment/equipment.service';
+import { InventoryService } from 'src/inventory/inventory.service';
+import { ItemService } from 'src/item/item.service';
 import { LocationDto } from 'src/location/dto/locationDto';
 import { LocationService } from 'src/location/location.service';
 import { MonsterService } from 'src/monster/monster.service';
@@ -8,6 +16,7 @@ import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { AttackMonsterDto } from './dto/AttackMonsterDto';
 import { CreatePlayerDto } from './dto/createPlayerDto';
+import { EquipDto } from './dto/equipDto';
 import { FightStartDto } from './dto/fightStartDto';
 import { LvlUpDto } from './dto/lvlUpDto';
 import { MovePlayerDto } from './dto/movePlayerDto';
@@ -21,6 +30,9 @@ export class PlayerService {
     private locationService: LocationService,
     private monsterService: MonsterService,
     private userService: UserService,
+    private itemService: ItemService,
+    private inventoryService: InventoryService,
+    private equipmentService: EquipmentService,
   ) {}
 
   async create(createdPlayerDto: CreatePlayerDto): Promise<Player> {
@@ -56,6 +68,54 @@ export class PlayerService {
     createdPlayer.ring = 'Empty';
 
     return this.playerRepository.save(createdPlayer);
+  }
+  // async lowercaseKeys(obj) {
+  //   const entries = Object.entries(obj);
+
+  //   return Object.fromEntries(
+  //     entries.map(([key, value]) => {
+  //       return [key, value.toLowerCase()];
+  //     }),
+  //   );
+  // }
+
+  async equip(equipDto: EquipDto) {
+    const { playerId, equipmentName } = equipDto;
+    console.log(equipmentName);
+    let errorMessage;
+    const item = await this.itemService.findById(equipmentName);
+    if (item === null) {
+      // throw new BadRequestException('Something bad happened', {
+      //   cause: new Error(),
+      //   description: 'You cannot equip this item',
+      // });
+      return { error: 'You cannot equip this item.' };
+    }
+
+    const inventory = await this.inventoryService.findById(playerId);
+
+    if (!Object.values(inventory).includes(item.id)) {
+      return { error: `Item not in inventory` };
+    }
+
+    const equipment = await this.equipmentService.findById(equipmentName);
+    const player = await this.findById(playerId);
+    const equiped = await this.equipmentService.findById(
+      player[equipment.type.toLowerCase()],
+    );
+
+    const newPlayer = new Player();
+    newPlayer.id = playerId;
+    newPlayer[equipment.type.toLowerCase()] = equipment.id;
+    newPlayer.attackBonus =
+      player.attackBonus - equiped.attackBonus + equipment.attackBonus;
+    newPlayer.strenghtBonus =
+      player.strenghtBonus - equiped.strenghtBonus + equipment.strenghtBonus;
+    newPlayer.defenceBonus =
+      player.defenceBonus - equiped.defenceBonus + equipment.defenceBonus;
+    console.log(newPlayer);
+    await this.playerRepository.save(newPlayer);
+    return await this.findById(playerId);
   }
 
   async move(movePlayerDto: MovePlayerDto): Promise<Player> {
@@ -124,6 +184,8 @@ export class PlayerService {
       lvlUp.hitpointsLvlUp = true;
       lvlUp.hitpointsLvl = newHitpointsLvl;
       player.hitpointsLvl = newHitpointsLvl;
+      player.hitpoints = newHitpointsLvl;
+      player.hitpointsMax = newHitpointsLvl;
     }
     if (player.combatLvl < newCombatLvl) {
       lvlUp.combatLvlUp = true;
@@ -166,14 +228,6 @@ export class PlayerService {
     }
     console.log(index);
     return index;
-  }
-
-  async loot(drop): Promise<Player> {
-    const { id, location } = movePlayerDto;
-    const movePlayer = new Player();
-    movePlayer.id = id;
-    movePlayer.location = location;
-    return this.playerRepository.save(movePlayer);
   }
 
   async findById(id: string) {

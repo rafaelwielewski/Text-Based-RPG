@@ -21,7 +21,7 @@ export class DropService {
     const dropTable = await this.findById(id);
     const dropTableArray = [];
     //const drop = {};
-    const drop2 = [];
+    const drop = [];
     //let dropIndex = 1;
     Object.entries(dropTable).forEach((entry) => {
       const [key, value] = entry;
@@ -36,11 +36,13 @@ export class DropService {
       if (Math.random() < dropTableArray[i + 2] / 100) {
         // drop['Drop' + dropIndex] = dropTableArray[i];
         // drop['Quantity' + dropIndex] = dropTableArray[i + 1];
-        drop2.push(dropTableArray[i]);
-        drop2.push(dropTableArray[i + 1]);
+        drop.push({ drop: dropTableArray[i], quantity: dropTableArray[i + 1] });
+        //drop.push({ quantity: dropTableArray[i + 1] });
+        // drop.push(dropTableArray[i]);
+        // drop.push(dropTableArray[i + 1]);
         //dropIndex++;
       }
     }
-    return drop2;
+    return drop;
   }
 }

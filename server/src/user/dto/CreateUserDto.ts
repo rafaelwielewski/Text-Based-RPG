@@ -1,7 +1,12 @@
-import { IsNumber, IsNotEmpty, IsString, IsBoolean, IsEmail  } from 'class-validator';
-             
-export class CreateUserDto {
+import {
+  IsNumber,
+  IsNotEmpty,
+  IsString,
+  IsBoolean,
+  IsEmail,
+} from 'class-validator';
 
+export class CreateUserDto {
   @IsString()
   username: string;
 
@@ -12,5 +17,4 @@ export class CreateUserDto {
   password: string;
 
   refreshToken: string;
-
 }

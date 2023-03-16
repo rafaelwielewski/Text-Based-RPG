@@ -1,7 +1,15 @@
 import { Controller } from '@nestjs/common';
 import { UseGuards } from '@nestjs/common/decorators';
-import { Delete, Get, Patch, Post } from '@nestjs/common/decorators/http/request-mapping.decorator';
-import { Body, Param } from '@nestjs/common/decorators/http/route-params.decorator';
+import {
+  Delete,
+  Get,
+  Patch,
+  Post,
+} from '@nestjs/common/decorators/http/request-mapping.decorator';
+import {
+  Body,
+  Param,
+} from '@nestjs/common/decorators/http/route-params.decorator';
 import { AccessTokenGuard } from 'src/common/guards/acessToken.guard';
 import { CreateUserDto } from './dto/CreateUserDto';
 import { UpdateUserDto } from './dto/UpdateUserDto';
@@ -9,13 +17,10 @@ import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-    
-    constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
-    @Post()
-    async create(
-        @Body() createUserDto: CreateUserDto) {
-
+  @Post()
+  async create(@Body() createUserDto: CreateUserDto) {
     return await this.userService.create(createUserDto);
   }
 
@@ -34,12 +39,10 @@ export class UserController {
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
-  
+
   @UseGuards(AccessTokenGuard)
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.userService.remove(id);
   }
 }
-
-

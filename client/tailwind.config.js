@@ -1,8 +1,10 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 const config = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}'
     //"./node_modules/flowbite/**/*.js",
     //"./node_modules/flowbite-react/**/*.js",
     //'./node_modules/tw-elements/dist/js/**/*.js',
@@ -16,7 +18,7 @@ const config = {
       3: '3px',
       4: '4px',
       6: '6px',
-      8: '8px',
+      8: '8px'
     },
     container: {
       center: true,
@@ -25,12 +27,12 @@ const config = {
         md: '768px',
         lg: '1024px',
         xl: '1280px',
-        '2xl': '1280px',
-      },
+        '2xl': '1280px'
+      }
     },
     fontFamily: {
       sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-      title: ['The Centurion'],
+      title: ['The Centurion']
     },
     fontSize: {
       xs: '0.875rem',
@@ -43,7 +45,7 @@ const config = {
       '4xl': '3rem',
       '5xl': '4rem',
       '6xl': 'rem',
-      title: '8rem',
+      title: '8rem'
       // xs: '0.75',
       // sm: '0.875rem',
       // base: '1.0rem',
@@ -60,16 +62,16 @@ const config = {
         128: '32rem',
         156: '39rem',
         192: '48rem',
-        200: '50rem',
+        200: '50rem'
       },
       height: {
         128: '32rem',
         156: '39rem',
         192: '48rem',
-        200: '50rem',
+        200: '50rem'
       },
       screens: {
-        auth: '100px',
+        auth: '100px'
       },
       colors: {
         primary: '#efd1a9',
@@ -86,18 +88,18 @@ const config = {
         lighter: '#E1E8ED',
         lightest: '#F5F8FA',
         success: '#17BF63',
-        danger: '#E0245E',
-      },
+        danger: '#E0245E'
+      }
     },
     fill: (theme) => ({
       current: 'currentColor',
-      primary: theme('colors.primary'),
-    }),
+      primary: theme('colors.primary')
+    })
   },
   plugins: [
     //require('flowbite/plugin'),
     //require('tw-elements/dist/plugin')
     //require("@tailwindcss/forms")
-  ],
+  ]
 };
 module.exports = config;

@@ -22,7 +22,6 @@ export class AuthService {
 
   // private user;
 
-
   async signUp(createUserDto: CreateUserDto): Promise<any> {
     // Check if user exists
     const userExists = await this.userService.findByUsername(
@@ -50,7 +49,7 @@ export class AuthService {
     return tokens;
   }
 
-	async signIn(data: AuthDto) {
+  async signIn(data: AuthDto) {
     // Check if user exists
     const user = await this.userService.findByUsername(data.username);
     if (!user) throw new BadRequestException('User does not exist');
@@ -60,11 +59,11 @@ export class AuthService {
     const tokens = await this.getTokens(user.id, user.username);
     await this.updateRefreshToken(user.id, tokens.refreshToken);
     // this.setUsername(user.username)
-    console.log()
+    console.log();
     return tokens;
   }
 
-	async logout(userId: string) {
+  async logout(userId: string) {
     return this.userService.update(userId, { refreshToken: null });
   }
 
@@ -98,7 +97,7 @@ export class AuthService {
         },
         {
           secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-          expiresIn: '7d',
+          expiresIn: '2d',
         },
       ),
     ]);
@@ -111,17 +110,12 @@ export class AuthService {
 
   async refreshTokens(userId: string, refreshToken: string) {
     const user = await this.userService.findById(userId);
-    console.log(userId)
     if (!user || !user.refreshToken)
       throw new ForbiddenException('Access Denied');
     const refreshTokenMatches = await argon2.verify(
       user.refreshToken,
       refreshToken,
     );
-    console.log(userId)
-    console.log(user.refreshToken)
-    console.log('iklj')
-    console.log(refreshToken)
     if (!refreshTokenMatches) throw new ForbiddenException('Access Denied');
     const tokens = await this.getTokens(user.id, user.username);
     await this.updateRefreshToken(user.id, tokens.refreshToken);
