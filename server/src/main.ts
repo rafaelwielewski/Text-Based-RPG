@@ -10,6 +10,8 @@ async function bootstrap() {
         'http://localhost:3000',
         'http://localhost:8081',
         'http://186.211.97.242:8081',
+        'https://text-based-rpg.vercel.app',
+        'https://text-based-rpg.vercel.app:8081',
       ],
       credentials: true,
     },

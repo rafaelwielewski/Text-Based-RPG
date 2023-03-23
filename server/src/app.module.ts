@@ -19,7 +19,6 @@ import { ItemModule } from './item/item.module';
 import { FoodModule } from './food/food.module';
 import { EquipmentModule } from './equipment/equipment.module';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -27,7 +26,7 @@ import { EquipmentModule } from './equipment/equipment.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
+        type: 'postgres',
         host: configService.get('DB_HOST'),
         port: +configService.get<number>('DB_PORT'),
         username: configService.get('DB_USERNAME'),

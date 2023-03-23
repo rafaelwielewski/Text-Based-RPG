@@ -82,24 +82,31 @@ export class PlayerService {
   async equip(equipDto: EquipDto) {
     const { playerId, equipmentName } = equipDto;
     console.log(equipmentName);
-    let errorMessage;
     const item = await this.itemService.findById(equipmentName);
+    console.log(item);
     if (item === null) {
-      // throw new BadRequestException('Something bad happened', {
-      //   cause: new Error(),
-      //   description: 'You cannot equip this item',
-      // });
-      return { error: 'You cannot equip this item.' };
+      return {
+        error: `You cannot equip this item. This equipment doesn't exists.`,
+      };
     }
 
     const inventory = await this.inventoryService.findById(playerId);
 
     if (!Object.values(inventory).includes(item.id)) {
-      return { error: `Item not in inventory` };
+      return { error: `You cannot equip this item. Item not in inventory` };
     }
 
     const equipment = await this.equipmentService.findById(equipmentName);
     const player = await this.findById(playerId);
+    if (
+      equipment.attackLvl >= player.attackLvl &&
+      equipment.strenghtLvl >= player.strenghtLvl &&
+      equipment.defenceLvl >= player.defenceLvl
+    ) {
+      return {
+        error: `You cannot equip this item, you don't have the minimun levels. attack level: ${equipment.attackLvl}, strenght level: ${equipment.strenghtLvl} defence level: ${equipment.defenceLvl}.`,
+      };
+    }
     const equiped = await this.equipmentService.findById(
       player[equipment.type.toLowerCase()],
     );

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { Item } from './types/item.entity';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class ItemService {
   async findById(id: string) {
     return this.itemRepository.findOne({
       where: {
-        id: id,
+        id: ILike(id),
       },
     });
   }
