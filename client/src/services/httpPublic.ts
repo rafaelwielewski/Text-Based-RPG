@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const httpPublic = axios.create({
-  baseURL: 'http://localhost:8082',
+  baseURL: 'https://text-based-rpg-server.vercel.app',
   headers: {
     'Content-Type': 'application/json'
   }

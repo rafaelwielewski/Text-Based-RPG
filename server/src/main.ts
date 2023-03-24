@@ -9,7 +9,7 @@ async function bootstrap() {
       origin: [
         'http://localhost:3000',
         'http://localhost:8081',
-        'http://186.211.97.242:8081',
+        'http://187.85.146.56:8081',
         'https://text-based-rpg.vercel.app',
         'https://text-based-rpg.vercel.app:8081',
       ],
