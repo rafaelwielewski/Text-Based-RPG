@@ -10,7 +10,7 @@ import {
   Body,
   Param,
 } from '@nestjs/common/decorators/http/route-params.decorator';
-import { AccessTokenGuard } from 'src/common/guards/acessTokenGuard';
+import { AccessTokenGuard } from '../common/guards/acessTokenGuard';
 import { CreateUserDto } from './dto/CreateUserDto';
 import { UpdateUserDto } from './dto/UpdateUserDto';
 import { UserService } from './user.service';
