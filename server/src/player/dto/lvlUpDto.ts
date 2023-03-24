@@ -1,7 +1,6 @@
-import { IsString, } from 'class-validator';
-             
-export class LvlUpDto {
+import { IsString } from 'class-validator';
 
+export class LvlUpDto {
   @IsString()
   id: string;
 
@@ -10,6 +9,4 @@ export class LvlUpDto {
 
   @IsString()
   lvl: number;
-
-
 }

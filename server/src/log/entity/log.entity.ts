@@ -1,6 +1,4 @@
 export class Log {
-
-    id: number;
-    text: string
-
+  id: number;
+  text: string;
 }

@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsString, IsNumber, IsArray, ValidateNested } from 'class-validator';
-import { MonsterDto } from 'src/monster/dto/monsterDto';
-import { PlayerDto } from 'src/player/dto/playerDto';
+import { MonsterDto } from '../../monster/dto/monsterDto';
+import { PlayerDto } from '../../player/dto/playerDto';
 
 export class FightDto {
   @ValidateNested({ each: true })

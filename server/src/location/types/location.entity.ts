@@ -2,7 +2,6 @@ import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Location {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -29,5 +28,4 @@ export class Location {
 
   @Column()
   shopName: string;
-
 }
