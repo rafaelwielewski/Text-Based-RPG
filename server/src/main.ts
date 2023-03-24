@@ -12,6 +12,7 @@ async function bootstrap() {
         'http://187.85.146.56:8081',
         'https://text-based-rpg.vercel.app',
         'https://text-based-rpg.vercel.app:8081',
+        'https://text-based-6ms5s2ecn-rafaelwielewski.vercel.app',
       ],
       credentials: true,
     },
