@@ -5,27 +5,26 @@ import { Monster } from './types/monster.entity';
 
 @Injectable()
 export class MonsterService {
-    constructor(@InjectRepository(Monster)
+  constructor(
+    @InjectRepository(Monster)
     private monsterRepository: Repository<Monster>,
   ) {}
 
-//   async attack(attackMonsterDto: AttackMonsterDto): Promise<Monster> {
+  //   async attack(attackMonsterDto: AttackMonsterDto): Promise<Monster> {
 
-//     const { playerId, monsterName } = attackMonsterDto
+  //     const { playerId, monsterName } = attackMonsterDto
 
+  //     const createdPlayer = new Player();
+  //     createdPlayer.id = id;
 
+  //     return this.playerRepository.save(createdPlayer);
 
-//     const createdPlayer = new Player();
-//     createdPlayer.id = id;
-
-
-//     return this.playerRepository.save(createdPlayer);
-
-//   }
-async findByName(monsterName: string) {
-    return this.monsterRepository.findOne({where: {
+  //   }
+  async findByName(monsterName: string) {
+    return this.monsterRepository.findOne({
+      where: {
         name: monsterName,
-    },});
+      },
+    });
   }
-
 }

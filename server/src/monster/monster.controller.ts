@@ -4,18 +4,16 @@ import { MonsterService } from './monster.service';
 
 @Controller('monster')
 export class MonsterController {
-    constructor(private readonly monsterService: MonsterService,
-        ) {}
+  constructor(private readonly monsterService: MonsterService) {}
 
-    // @Post('attack')
-    // async create(
-    // @Body() attackMonsterDto: AttackMonsterDto) {
-    // return await this.monsterService.attack(attackMonsterDto);
-    // }
+  // @Post('attack')
+  // async create(
+  // @Body() attackMonsterDto: AttackMonsterDto) {
+  // return await this.monsterService.attack(attackMonsterDto);
+  // }
 
-    @Get(':monsterName')
-    async findById(@Param('monsterName') monsterName: string) {
+  @Get(':monsterName')
+  async findById(@Param('monsterName') monsterName: string) {
     return await this.monsterService.findByName(monsterName);
-    }
+  }
 }
-

@@ -5,9 +5,7 @@ import { MonsterService } from './monster.service';
 import { Monster } from './types/monster.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Monster]),
-  ],
+  imports: [TypeOrmModule.forFeature([Monster])],
   controllers: [MonsterController],
   providers: [MonsterService],
   exports: [MonsterService],

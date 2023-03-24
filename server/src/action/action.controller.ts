@@ -6,25 +6,20 @@ import { LoginDto } from './dto/loginDto';
 
 @Controller('action')
 export class ActionController {
+  constructor(private readonly actionService: ActionService) {}
 
-    constructor(private readonly actionService: ActionService) {}
-
-    @Post()
-    async action(
-    @Body() actionDto: ActionDto) {
+  @Post()
+  async action(@Body() actionDto: ActionDto) {
     return await this.actionService.action(actionDto);
-    }
+  }
 
-    @Post("create")
-    async create(
-    @Body() createDto: CreateDto) {
+  @Post('create')
+  async create(@Body() createDto: CreateDto) {
     return await this.actionService.create(createDto);
-    }
+  }
 
-    @Post("login")
-    async login(
-    @Body() loginDto: LoginDto) {
+  @Post('login')
+  async login(@Body() loginDto: LoginDto) {
     return await this.actionService.login(loginDto);
-    }
-
+  }
 }

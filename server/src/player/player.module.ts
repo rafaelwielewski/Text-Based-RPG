@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EquipmentModule } from 'src/equipment/equipment.module';
-import { InventoryModule } from 'src/inventory/inventory.module';
-import { ItemModule } from 'src/item/item.module';
-import { LocationModule } from 'src/location/location.module';
-import { MonsterModule } from 'src/monster/monster.module';
-import { UserModule } from 'src/user/user.module';
+import { EquipmentModule } from '../equipment/equipment.module';
+import { InventoryModule } from '../inventory/inventory.module';
+import { ItemModule } from '../item/item.module';
+import { LocationModule } from '../location/location.module';
+import { MonsterModule } from '../monster/monster.module';
+import { UserModule } from '../user/user.module';
 import { PlayerController } from './player.controller';
 import { PlayerService } from './player.service';
 import { Player } from './types/player.entity';

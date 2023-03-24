@@ -1,6 +1,6 @@
 import { Body, Param, Controller, Post, Get, UseGuards } from '@nestjs/common';
-import { AccessTokenGuard } from 'src/common/guards/acessToken.guard';
-import { LocationService } from 'src/location/location.service';
+import { AccessTokenGuard } from '../common/guards/acessTokenGuard';
+import { LocationService } from '../location/location.service';
 import { CreatePlayerDto } from './dto/createPlayerDto';
 import { EquipDto } from './dto/equipDto';
 import { FightStartDto } from './dto/fightStartDto';

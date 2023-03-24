@@ -1,19 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthService } from 'src/auth/auth.service';
-import { Log } from 'src/log/entity/log.entity';
-import { LogService } from 'src/log/log.service';
-import { CreatePlayerDto } from 'src/player/dto/createPlayerDto';
-import { PlayerService } from 'src/player/player.service';
-import { Player } from 'src/player/types/player.entity';
-import { User } from 'src/user/entity/user.entity';
-import { UserService } from 'src/user/user.service';
+import { AuthService } from '../auth/auth.service';
+import { Log } from '../log/entity/log.entity';
+import { LogService } from '../log/log.service';
+import { CreatePlayerDto } from '../player/dto/createPlayerDto';
+import { PlayerService } from '../player/player.service';
+import { Player } from '../player/types/player.entity';
+import { User } from '../user/entity/user.entity';
+import { UserService } from '../user/user.service';
 import { Repository } from 'typeorm';
 import { ActionDto } from './dto/actionDto';
 import { CreateDto } from './dto/createDto';
 import { LoginDto } from './dto/loginDto';
-import { Action } from './types/action.entity';
-import { messages } from './types/messages.entity';
 
 @Injectable()
 export class ActionService {

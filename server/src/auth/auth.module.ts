@@ -4,9 +4,9 @@ import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { AccessTokenStrategy } from './strategies/accessToken.strategy';
 import { RefreshTokenStrategy } from './strategies/refreshToken.strategy';
-import { UserModule } from 'src/user/user.module';
-import { PlayerModule } from 'src/player/player.module';
-import { InventoryModule } from 'src/inventory/inventory.module';
+import { UserModule } from '../user/user.module';
+import { PlayerModule } from '../player/player.module';
+import { InventoryModule } from '../inventory/inventory.module';
 
 @Module({
   imports: [

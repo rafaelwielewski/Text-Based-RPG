@@ -6,15 +6,16 @@ import { Location } from './types/location.entity';
 
 @Injectable()
 export class LocationService {
-    constructor(@InjectRepository(Location)
+  constructor(
+    @InjectRepository(Location)
     private locationRepository: Repository<Location>,
   ) {}
 
   async findByName(locationDto: string) {
-
-    return this.locationRepository.findOne({where: {
+    return this.locationRepository.findOne({
+      where: {
         name: locationDto,
-    },});
+      },
+    });
   }
-
 }

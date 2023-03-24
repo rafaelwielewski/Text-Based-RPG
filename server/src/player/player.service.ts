@@ -5,14 +5,14 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EquipmentService } from 'src/equipment/equipment.service';
-import { InventoryService } from 'src/inventory/inventory.service';
-import { ItemService } from 'src/item/item.service';
-import { LocationDto } from 'src/location/dto/locationDto';
-import { LocationService } from 'src/location/location.service';
-import { MonsterService } from 'src/monster/monster.service';
-import { Monster } from 'src/monster/types/monster.entity';
-import { UserService } from 'src/user/user.service';
+import { EquipmentService } from '../equipment/equipment.service';
+import { InventoryService } from '../inventory/inventory.service';
+import { ItemService } from '../item/item.service';
+import { LocationDto } from '../location/dto/locationDto';
+import { LocationService } from '../location/location.service';
+import { MonsterService } from '../monster/monster.service';
+import { Monster } from '../monster/types/monster.entity';
+import { UserService } from '../user/user.service';
 import { Repository } from 'typeorm';
 import { AttackMonsterDto } from './dto/AttackMonsterDto';
 import { CreatePlayerDto } from './dto/createPlayerDto';

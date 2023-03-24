@@ -3,12 +3,12 @@ import * as argon2 from 'argon2';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthDto } from './dto/auth.dto';
-import { UserService } from 'src/user/user.service';
-import { CreateUserDto } from 'src/user/dto/CreateUserDto';
+import { UserService } from '../user/user.service';
+import { CreateUserDto } from '../user/dto/CreateUserDto';
 import { ForbiddenException } from '@nestjs/common/exceptions';
-import { PlayerService } from 'src/player/player.service';
-import { CreatePlayerDto } from 'src/player/dto/createPlayerDto';
-import { InventoryService } from 'src/inventory/inventory.service';
+import { PlayerService } from '../player/player.service';
+import { CreatePlayerDto } from '../player/dto/createPlayerDto';
+import { InventoryService } from '../inventory/inventory.service';
 
 @Injectable()
 export class AuthService {
