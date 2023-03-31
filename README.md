@@ -28,7 +28,9 @@ Text-Based-RPG is a browser-based role-playing game where players navigate a wor
 
 # ▶️ Demo
 
-[View Demo]()
+[View Demo](https://text-based-rpg.vercel.app/)
+
+## UI
 
 # 💾 How to run locally
 
@@ -62,10 +64,6 @@ Start the client
 ```bash
 npm start dev
 ```
-
-Open http://localhost:3000 to view it in the browser.
-
-## UI
 
 ## 👤 Author
 
