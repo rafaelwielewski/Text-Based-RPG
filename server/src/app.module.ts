@@ -6,7 +6,6 @@ import { ConfigService, ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PlayerModule } from './player/player.module';
-import { ActionModule } from './action/action.module';
 import { LogModule } from './log/log.module';
 import { LocationModule } from './location/location.module';
 import { MonsterModule } from './monster/monster.module';
@@ -32,7 +31,7 @@ import { EquipmentModule } from './equipment/equipment.module';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        entities: ['dist/**/*.entity{.ts,.js}'],
         synchronize: true,
         // cache: {
         //   type: "redis",
@@ -46,7 +45,6 @@ import { EquipmentModule } from './equipment/equipment.module';
     UserModule,
     AuthModule,
     PlayerModule,
-    ActionModule,
     LogModule,
     LocationModule,
     MonsterModule,
